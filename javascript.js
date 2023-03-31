@@ -12,7 +12,6 @@ sortOnUserIdV=1
 sortOnTitleV=1
 sortOnBodyV=1
 
-
 function display(){
     $('table tbody').empty()
     displayDataInTable(posts,numPosts)
@@ -35,7 +34,6 @@ function sortOnPostId(){
                     posts[i]=posts[j]
                     posts[j]=temp
                 }
-    
             }
         }
     }
@@ -124,6 +122,7 @@ fetchPosts = async () => {
         }
     })
 }
+
 async function editPost(id){
 
     console.log("Edit ",id)
@@ -238,11 +237,24 @@ function validate(post){
     return valid
 }
 
-function displayDataInTable(posts, count = 3) {
+function displayDataInTable(posts, count = 5) {
     for (let i = 0; i < posts.length && i < count; i++) {
         post = posts[i]
         unq=post.id+""
         var markup = "<tr id='"+post.id+"'><td>" + post.id + "</td><td id='userId"+unq+"'>"+post.userId+"</td><td id='titleId"+unq+"'>" + post.title + "</td><td id='bodyId"+unq+"'>" + post.body + "</td><td><button class='btn btn-light btn-sm' style='font-weight:bold; color:#3c9ca8;font-size:medium; margin:1%' onclick='editPost("+post.id+")'>Edit</button><button class='btn btn-light btn-sm' style='font-weight:bold; color:#3c9ca8;font-size:medium; margin:1%' onclick='removePost("+post.id+")'>Remove</button></td></tr>";
         $("table tbody").append(markup);
     }
+}
+
+function slideDown(text) {
+    const slideContent = document.querySelector('[data-target="slide-content"]');
+    $('#submit-btn').val(text)
+    slideContent.classList.remove("slide-up");
+    slideContent.classList.add("slide-down");
+}
+
+function slideUp() {
+    const slideContent = document.querySelector('[data-target="slide-content"]');
+    slideContent.classList.remove("slide-down");
+    slideContent.classList.add("slide-up");
 }
